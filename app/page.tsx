@@ -10,7 +10,7 @@ export default function Home() {
       {/* Navigation */}
       <nav className="border-b border-white/10">
         <div className="max-w-7xl mx-auto px-6 py-3 flex justify-between items-center">
-          <div className="text-xl font-bold text-white">SwiftSign</div>
+          <div className="text-xl font-bold text-white">SwiftSign ✨</div>
           <div className="flex items-center gap-4">
             <SignedOut>
               <SignInButton mode="modal">
