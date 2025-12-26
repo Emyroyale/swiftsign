@@ -1,4 +1,9 @@
+'use client'
+import { useState } from 'react'
 import { SignInButton, SignedIn, SignedOut, UserButton } from '@clerk/nextjs'
+import { supabase } from '@/lib/supabase'
+import Footer from '@/components/Footer'
+
 export default function Home() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-900 via-blue-900 to-slate-900">
@@ -6,16 +11,21 @@ export default function Home() {
       <nav className="border-b border-white/10">
         <div className="max-w-7xl mx-auto px-6 py-3 flex justify-between items-center">
           <div className="text-xl font-bold text-white">SwiftSign</div>
-          <SignedOut>
-  <SignInButton mode="modal">
-    <button className="bg-white text-blue-900 hover:bg-blue-50 px-5 py-2 rounded-lg font-semibold text-sm">
-      Sign In
-    </button>
-  </SignInButton>
-</SignedOut>
-<SignedIn>
-  <UserButton />
-</SignedIn>
+          <div className="flex items-center gap-4">
+            <SignedOut>
+              <SignInButton mode="modal">
+                <button className="bg-white text-blue-900 hover:bg-blue-50 px-5 py-2 rounded-lg font-semibold text-sm">
+                  Sign In
+                </button>
+              </SignInButton>
+            </SignedOut>
+            <SignedIn>
+              <a href="/dashboard" className="text-white/80 hover:text-white text-sm">
+                Dashboard
+              </a>
+              <UserButton />
+            </SignedIn>
+          </div>
         </div>
       </nav>
 
@@ -33,19 +43,7 @@ export default function Home() {
           </p>
           
           {/* Email Capture */}
-          <div className="max-w-xl mx-auto flex gap-3 mb-2">
-            <input 
-              type="email" 
-              placeholder="Enter your email"
-              className="flex-1 px-5 py-3 rounded-lg text-base border-2 border-white/20 bg-white/10 text-white placeholder-white/50 focus:border-blue-400 focus:outline-none"
-            />
-            <button className="bg-blue-500 hover:bg-blue-600 text-white font-semibold px-8 py-3 rounded-lg shadow-xl transition-all whitespace-nowrap">
-              Get Early Access
-            </button>
-          </div>
-          <p className="text-xs text-white/60">
-            Coming Soon • First 100 users get locked-in pricing forever
-          </p>
+          <WaitlistForm />
         </div>
 
         {/* Problem vs Solution - Side by Side */}
@@ -166,13 +164,68 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Footer - Minimal */}
-      <div className="border-t border-white/10 py-6">
-        <div className="max-w-7xl mx-auto px-6 text-center">
-          <div className="text-lg font-bold text-white mb-1">SwiftSign</div>
-          <p className="text-white/50 text-xs">eSignature for Google Workspace • © 2025</p>
-        </div>
-      </div>
+      <Footer />
     </div>
-  );
+  )
+}
+
+function WaitlistForm() {
+  const [email, setEmail] = useState('')
+  const [loading, setLoading] = useState(false)
+  const [message, setMessage] = useState('')
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setLoading(true)
+    setMessage('')
+
+    try {
+      const { error } = await supabase
+        .from('waitlist')
+        .insert([{ email }])
+
+      if (error) {
+        if (error.code === '23505') {
+          setMessage("You're already on the waitlist!")
+        } else {
+          setMessage('Something went wrong. Try again.')
+        }
+      } else {
+        setMessage('✅ Success! You\'re on the list!')
+        setEmail('')
+      }
+    } catch (err) {
+      setMessage('Error signing up. Please try again.')
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  return (
+    <div>
+      <form onSubmit={handleSubmit} className="max-w-xl mx-auto flex gap-3 mb-2">
+        <input 
+          type="email" 
+          placeholder="Enter your email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+          className="flex-1 px-5 py-3 rounded-lg text-base border-2 border-white/20 bg-white/10 text-white placeholder-white/50 focus:border-blue-400 focus:outline-none"
+        />
+        <button 
+          type="submit"
+          disabled={loading}
+          className="bg-blue-500 hover:bg-blue-600 text-white font-semibold px-8 py-3 rounded-lg shadow-xl transition-all whitespace-nowrap disabled:opacity-50"
+        >
+          {loading ? 'Saving...' : 'Get Early Access'}
+        </button>
+      </form>
+      {message && (
+        <p className="text-center text-sm text-white/90 mt-2">{message}</p>
+      )}
+      <p className="text-xs text-white/60 text-center">
+        Coming Soon • First 100 users get locked-in pricing forever
+      </p>
+    </div>
+  )
 }
