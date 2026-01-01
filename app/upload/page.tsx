@@ -7,7 +7,7 @@ import Footer from '@/components/Footer'
 import dynamic from 'next/dynamic'
 
 // Dynamically import everything PDF-related
-const PDFViewer = dynamic(() => import('./PDFViewer'), { ssr: false })
+const PDFEditor = dynamic(() => import('./PDFEditor'), { ssr: false })
 
 export default function UploadPage() {
   const { user, isLoaded } = useUser()
@@ -110,7 +110,7 @@ export default function UploadPage() {
           </label>
         </div>
 
-        {pdfUrl && <PDFViewer pdfUrl={pdfUrl} fileName={fileName} />}
+        {pdfUrl && <PDFEditor pdfUrl={pdfUrl} fileName={fileName} />}
       </div>
 
       <Footer />

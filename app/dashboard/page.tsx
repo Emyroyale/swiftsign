@@ -53,7 +53,15 @@ export default function Dashboard() {
               ✅ You're In!
             </div>
             <div className="text-white/80 mb-4">Part of the first 100 early access users</div>
-            <div className="text-sm text-white/60">Launch: April 2026 • We'll email you!</div>
+            <div className="text-sm text-white/60 mb-6">Launch: April 2026 • We'll email you!</div>
+            
+            {/* Upload PDF Button */}
+            <a 
+              href="/upload"
+              className="inline-block bg-blue-500 hover:bg-blue-600 text-white font-semibold px-8 py-3 rounded-lg shadow-xl transition-all transform hover:scale-105"
+            >
+              Upload PDF
+            </a>
           </div>
         </div>
 
