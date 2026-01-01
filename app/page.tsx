@@ -4,7 +4,6 @@ import { SignInButton, SignedIn, SignedOut, UserButton } from '@clerk/nextjs'
 import { supabase } from '@/lib/supabase'
 
 export default function Home() {
-  const [billingCycle, setBillingCycle] = useState<'monthly' | 'annual'>('annual')
   const [openFaq, setOpenFaq] = useState<number | null>(null)
   const [showIntegrationModal, setShowIntegrationModal] = useState<string | null>(null)
 
@@ -44,10 +43,10 @@ export default function Home() {
                   </div>
                   <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-2">Gmail Integration</h3>
                   <p className="text-gray-600 mb-6 text-sm md:text-base">
-                    Send signed documents directly via Gmail. Join the waitlist to get early access!
+                    Send signed documents directly via Gmail. Join early access to get started!
                   </p>
-                  <a href="#waitlist" className="block w-full bg-gradient-to-r from-red-600 to-red-700 text-white font-bold px-6 py-3 rounded-xl mb-3 text-sm md:text-base" onClick={() => setShowIntegrationModal(null)}>
-                    Join Waitlist →
+                  <a href="#early-access" className="block w-full bg-gradient-to-r from-red-600 to-red-700 text-white font-bold px-6 py-3 rounded-xl mb-3 text-sm md:text-base" onClick={() => setShowIntegrationModal(null)}>
+                    Join Early Access →
                   </a>
                   <button onClick={() => setShowIntegrationModal(null)} className="text-gray-500 text-sm">
                     Close
@@ -64,10 +63,10 @@ export default function Home() {
                   </div>
                   <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-2">Google Docs Integration</h3>
                   <p className="text-gray-600 mb-6 text-sm md:text-base">
-                    Import Google Docs and convert to PDF for signing. Join the waitlist for early access!
+                    Import Google Docs and convert to PDF for signing. Join early access!
                   </p>
-                  <a href="#waitlist" className="block w-full bg-gradient-to-r from-blue-600 to-blue-700 text-white font-bold px-6 py-3 rounded-xl mb-3 text-sm md:text-base" onClick={() => setShowIntegrationModal(null)}>
-                    Join Waitlist →
+                  <a href="#early-access" className="block w-full bg-gradient-to-r from-blue-600 to-blue-700 text-white font-bold px-6 py-3 rounded-xl mb-3 text-sm md:text-base" onClick={() => setShowIntegrationModal(null)}>
+                    Join Early Access →
                   </a>
                   <button onClick={() => setShowIntegrationModal(null)} className="text-gray-500 text-sm">
                     Close
@@ -86,8 +85,8 @@ export default function Home() {
                   <p className="text-gray-600 mb-6 text-sm md:text-base">
                     Bulk send documents using Google Sheets. Perfect for sending to multiple recipients!
                   </p>
-                  <a href="#waitlist" className="block w-full bg-gradient-to-r from-green-600 to-green-700 text-white font-bold px-6 py-3 rounded-xl mb-3 text-sm md:text-base" onClick={() => setShowIntegrationModal(null)}>
-                    Join Waitlist →
+                  <a href="#early-access" className="block w-full bg-gradient-to-r from-green-600 to-green-700 text-white font-bold px-6 py-3 rounded-xl mb-3 text-sm md:text-base" onClick={() => setShowIntegrationModal(null)}>
+                    Join Early Access →
                   </a>
                   <button onClick={() => setShowIntegrationModal(null)} className="text-gray-500 text-sm">
                     Close
@@ -131,7 +130,7 @@ export default function Home() {
             <span className="animate-ping absolute inline-flex h-2 w-2 rounded-full bg-blue-400 opacity-75"></span>
             <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
           </span>
-          <span className="whitespace-nowrap">First 100 users lock in $9.99/month forever</span>
+          <span className="whitespace-nowrap">First 100 users: $9.99/month locked in for life</span>
         </div>
 
         {/* Main Headline */}
@@ -152,7 +151,7 @@ export default function Home() {
         </p>
 
         {/* Email Capture */}
-        <WaitlistForm />
+        <EarlyAccessForm />
 
         {/* Trust Indicators */}
         <div className="flex flex-wrap items-center justify-center gap-4 md:gap-8 mt-6 md:mt-8 text-xs md:text-sm text-gray-500 px-4">
@@ -177,7 +176,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* GOOGLE WORKSPACE INTEGRATIONS - REAL & FUNCTIONAL */}
+      {/* GOOGLE WORKSPACE INTEGRATIONS */}
       <section className="bg-gradient-to-br from-gray-50 to-blue-50 py-12 md:py-20">
         <div className="max-w-6xl mx-auto px-4 md:px-6">
           <div className="text-center mb-8 md:mb-12">
@@ -402,7 +401,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* SLEEK CTA SECTION - SwiftSign Branded */}
+      {/* SLEEK CTA SECTION */}
       <section className="bg-gradient-to-br from-blue-600 to-purple-600 py-16 md:py-24">
         <div className="max-w-6xl mx-auto px-4 md:px-6">
           <div className="flex flex-col md:flex-row items-center justify-between gap-8">
@@ -419,10 +418,10 @@ export default function Home() {
             {/* Right Side - CTA Button */}
             <div className="flex-shrink-0">
               <a 
-                href="#waitlist" 
+                href="#early-access" 
                 className="inline-block bg-white text-blue-600 font-bold text-lg px-10 md:px-12 py-4 md:py-5 rounded-xl shadow-xl hover:shadow-2xl transition-all transform hover:scale-105"
               >
-                Join Waitlist
+                Join Early Access
               </a>
             </div>
           </div>
@@ -472,120 +471,127 @@ export default function Home() {
         </div>
       </section>
 
-      {/* PRICING SECTION - Optimized Spacing */}
+      {/* PRICING SECTION - SIDE BY SIDE CARDS */}
       <section className="bg-gradient-to-br from-blue-600 to-purple-600 py-12 md:py-16">
-        <div className="max-w-4xl mx-auto px-4 md:px-6">
-          <div className="text-center mb-8 md:mb-10">
+        <div className="max-w-6xl mx-auto px-4 md:px-6">
+          <div className="text-center mb-8 md:mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-3 px-4">
               Simple, Transparent Pricing
             </h2>
-            <p className="text-base md:text-lg text-blue-100 mb-6 px-4">
+            <p className="text-base md:text-lg text-blue-100 mb-2 px-4">
               One plan. Everything included. No hidden fees.
             </p>
+          </div>
 
-            {/* Billing Toggle */}
-            <div className="inline-flex items-center gap-2 md:gap-3 bg-white/10 backdrop-blur-sm rounded-full p-1">
-              <button
-                onClick={() => setBillingCycle('monthly')}
-                className={`px-4 md:px-6 py-2 rounded-full text-xs md:text-sm font-semibold transition-all ${
-                  billingCycle === 'monthly'
-                    ? 'bg-white text-blue-600 shadow-lg'
-                    : 'text-white hover:text-blue-100'
-                }`}
-              >
-                Monthly
-              </button>
-              <button
-                onClick={() => setBillingCycle('annual')}
-                className={`px-4 md:px-6 py-2 rounded-full text-xs md:text-sm font-semibold transition-all ${
-                  billingCycle === 'annual'
-                    ? 'bg-white text-blue-600 shadow-lg'
-                    : 'text-white hover:text-blue-100'
-                }`}
-              >
-                Annual
-                <span className="ml-1 md:ml-2 text-xs bg-green-400 text-green-900 px-2 py-0.5 rounded-full">
-                  Save 20%
-                </span>
-              </button>
+          {/* Side-by-Side Pricing Cards */}
+          <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+            {/* Monthly Plan */}
+            <div className="bg-white rounded-2xl md:rounded-3xl p-6 md:p-8 shadow-xl">
+              <div className="text-center mb-6">
+                <div className="text-xs md:text-sm font-semibold text-gray-600 mb-2">MONTHLY</div>
+                <div className="text-4xl md:text-5xl font-bold text-gray-900 mb-1">
+                  $9.99<span className="text-xl md:text-2xl text-gray-500">/month</span>
+                </div>
+                <p className="text-sm md:text-base text-gray-600">Cancel anytime</p>
+              </div>
+
+              {/* Features */}
+              <div className="space-y-3 mb-6">
+                <div className="flex items-center gap-3">
+                  <svg className="w-5 h-5 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                  </svg>
+                  <span className="text-sm md:text-base text-gray-900">Unlimited signatures*</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <svg className="w-5 h-5 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                  </svg>
+                  <span className="text-sm md:text-base text-gray-900">Unlimited team members</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <svg className="w-5 h-5 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                  </svg>
+                  <span className="text-sm md:text-base text-gray-900">Google Workspace integration</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <svg className="w-5 h-5 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                  </svg>
+                  <span className="text-sm md:text-base text-gray-900">Mobile signing</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <svg className="w-5 h-5 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                  </svg>
+                  <span className="text-sm md:text-base text-gray-900">Email support</span>
+                </div>
+              </div>
+
+              <a href="#early-access" className="block w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white font-bold px-6 py-3 rounded-xl text-center hover:shadow-xl transition-all">
+                Join Early Access →
+              </a>
+            </div>
+
+            {/* Annual Plan - Highlighted */}
+            <div className="bg-white rounded-2xl md:rounded-3xl p-6 md:p-8 shadow-2xl ring-4 ring-green-400 relative">
+              <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-green-500 text-white px-4 py-1 rounded-full text-xs font-bold">
+                SAVE 20%
+              </div>
+              
+              <div className="text-center mb-6">
+                <div className="text-xs md:text-sm font-semibold text-gray-600 mb-2">ANNUAL</div>
+                <div className="text-4xl md:text-5xl font-bold text-gray-900 mb-1">
+                  $7.99<span className="text-xl md:text-2xl text-gray-500">/month</span>
+                </div>
+                <p className="text-sm md:text-base text-gray-600">$95.88 billed annually</p>
+                <p className="text-xs text-green-600 font-semibold mt-1">Save $23.88/year</p>
+              </div>
+
+              {/* Features */}
+              <div className="space-y-3 mb-6">
+                <div className="flex items-center gap-3">
+                  <svg className="w-5 h-5 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                  </svg>
+                  <span className="text-sm md:text-base text-gray-900">Unlimited signatures*</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <svg className="w-5 h-5 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                  </svg>
+                  <span className="text-sm md:text-base text-gray-900">Unlimited team members</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <svg className="w-5 h-5 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                  </svg>
+                  <span className="text-sm md:text-base text-gray-900">Google Workspace integration</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <svg className="w-5 h-5 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                  </svg>
+                  <span className="text-sm md:text-base text-gray-900">Mobile signing</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <svg className="w-5 h-5 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                  </svg>
+                  <span className="text-sm md:text-base text-gray-900">Email support</span>
+                </div>
+              </div>
+
+              <a href="#early-access" className="block w-full bg-gradient-to-r from-green-600 to-green-700 text-white font-bold px-6 py-3 rounded-xl text-center hover:shadow-xl transition-all">
+                Join Early Access →
+              </a>
             </div>
           </div>
 
-          {/* Pricing Card - Compact */}
-          <div className="bg-white rounded-2xl md:rounded-3xl p-6 md:p-10 shadow-2xl max-w-2xl mx-auto">
-            <div className="text-center mb-6">
-              <div className="text-xs md:text-sm font-semibold text-blue-600 mb-2">PROFESSIONAL</div>
-              {billingCycle === 'monthly' ? (
-                <>
-                  <div className="text-4xl md:text-5xl font-bold text-gray-900 mb-1">
-                    $9.99<span className="text-xl md:text-2xl text-gray-500">/month</span>
-                  </div>
-                  <p className="text-sm md:text-base text-gray-600">Billed monthly • Cancel anytime</p>
-                </>
-              ) : (
-                <>
-                  <div className="text-4xl md:text-5xl font-bold text-gray-900 mb-1">
-                    $7.99<span className="text-xl md:text-2xl text-gray-500">/month</span>
-                  </div>
-                  <p className="text-sm md:text-base text-gray-600">$95.88 billed annually • Save $23.88/year</p>
-                </>
-              )}
-            </div>
-
-            {/* Features List - Compact */}
-            <div className="space-y-3 mb-6">
-              <div className="flex items-center gap-3 pb-3 border-b border-gray-100">
-                <svg className="w-5 h-5 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                </svg>
-                <span className="text-sm md:text-base text-gray-900 font-medium">Unlimited signatures</span>
-              </div>
-
-              <div className="flex items-center gap-3 pb-3 border-b border-gray-100">
-                <svg className="w-5 h-5 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                </svg>
-                <span className="text-sm md:text-base text-gray-900 font-medium">Unlimited team members</span>
-              </div>
-
-              <div className="flex items-center gap-3 pb-3 border-b border-gray-100">
-                <svg className="w-5 h-5 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                </svg>
-                <span className="text-sm md:text-base text-gray-900 font-medium">Google Workspace integration</span>
-              </div>
-
-              <div className="flex items-center gap-3 pb-3 border-b border-gray-100">
-                <svg className="w-5 h-5 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                </svg>
-                <span className="text-sm md:text-base text-gray-900 font-medium">Mobile signing on any device</span>
-              </div>
-
-              <div className="flex items-center gap-3 pb-3 border-b border-gray-100">
-                <svg className="w-5 h-5 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                </svg>
-                <span className="text-sm md:text-base text-gray-900 font-medium">Email support</span>
-              </div>
-
-              <div className="flex items-center gap-3">
-                <svg className="w-5 h-5 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                </svg>
-                <span className="text-sm md:text-base text-gray-900 font-medium">Cancel anytime (no contract)</span>
-              </div>
-            </div>
-
-            {/* CTA Button */}
-            <a href="#waitlist" className="block w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white font-bold px-6 md:px-8 py-3 md:py-4 rounded-xl shadow-xl hover:shadow-2xl transition-all transform hover:scale-105 text-base md:text-lg text-center">
-              Join the Waitlist →
-            </a>
-            
-            <p className="text-xs md:text-sm text-gray-500 mt-3 text-center">
-              First 100 users lock in this price forever
-            </p>
-          </div>
+          <p className="text-xs text-center text-white/80 mt-6">
+            *Based on normal business use. See <a href="/terms" className="underline hover:text-white">Fair Use Policy</a>
+          </p>
         </div>
       </section>
 
@@ -605,12 +611,12 @@ export default function Home() {
             {/* FAQ Items */}
             {[
               {
-                q: "How is SwiftSign different from DocuSign?",
-                a: "SwiftSign is built specifically for Google Workspace teams with flat pricing (no per-user fees). We focus on core eSignature features that work perfectly, without the 200+ bloated features you'll never use. Plus, we integrate natively with Google Drive, Docs, Gmail, and Sheets so you never leave your workflow."
+                q: "How is SwiftSign different from other eSignature tools?",
+                a: "SwiftSign is built specifically for Google Workspace teams with flat pricing (no per-user fees). We focus on core eSignature features that work perfectly, without bloated features you'll never use. Plus, we integrate natively with Google Drive, Docs, Gmail, and Sheets so you never leave your workflow."
               },
               {
                 q: "Are SwiftSign signatures legally binding?",
-                a: "Yes! SwiftSign signatures are 100% legally binding and compliant with the ESIGN Act and UETA (Uniform Electronic Transactions Act). Our signatures are court-admissible and have the same legal validity as traditional wet ink signatures and other eSignature platforms like DocuSign."
+                a: "Yes! SwiftSign signatures are 100% legally binding and compliant with the ESIGN Act and UETA (Uniform Electronic Transactions Act). Our signatures are court-admissible and have the same legal validity as traditional wet ink signatures."
               },
               {
                 q: "Can I cancel my subscription anytime?",
@@ -622,11 +628,15 @@ export default function Home() {
               },
               {
                 q: "What happens after the first 100 users?",
-                a: "The first 100 users get grandfathered pricing at $9.99/month forever - even if we raise prices later. After the first 100 spots are filled, new users will pay our standard pricing of $12.99/month. That's still 68% cheaper than DocuSign! Join the waitlist now to secure your lifetime discount."
+                a: "The first 100 users get grandfathered pricing at $9.99/month locked in for life - even if we raise prices later. After the first 100 spots are filled, new users will pay our standard pricing of $12.99/month. That's still 68% cheaper than enterprise tools! Join early access now to secure your lifetime discount."
               },
               {
                 q: "Is there really unlimited signatures and users?",
-                a: "Yes! Unlike DocuSign's per-user pricing and envelope limits, SwiftSign offers truly unlimited signatures, unlimited team members, and unlimited documents for one flat monthly price. No hidden fees, no surprise charges, no artificial limits."
+                a: "Yes! SwiftSign offers unlimited signatures and unlimited team members for one flat monthly price based on normal business use. This means typical business document signing workflows including contracts, agreements, NDAs, and internal documents. See our Fair Use Policy in the Terms of Service for complete details."
+              },
+              {
+                q: "Is SwiftSign affiliated with Google?",
+                a: "No. SwiftSign works with Google Workspace but is not affiliated with or endorsed by Google LLC. We build integration tools that connect with Google's publicly available APIs to provide seamless eSignature functionality within your existing Google Workspace environment."
               }
             ].map((faq, i) => (
               <div key={i} className="bg-white rounded-xl md:rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
@@ -657,30 +667,30 @@ export default function Home() {
         </div>
       </section>
 
-      {/* FINAL CTA - Waitlist */}
-      <section id="waitlist" className="py-12 md:py-20 bg-gradient-to-b from-white to-gray-50">
+      {/* FINAL CTA - Early Access */}
+      <section id="early-access" className="py-12 md:py-20 bg-gradient-to-b from-white to-gray-50">
         <div className="max-w-4xl mx-auto px-4 md:px-6 text-center">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-3 md:mb-4 px-4">
-            Join the Waitlist Today
+            Join Early Access
           </h2>
           <p className="text-lg md:text-xl text-gray-600 mb-6 md:mb-8 px-4">
-            Lock in <strong className="text-gray-900">$9.99/month forever</strong>. Be among the first 100 users.
+            Secure early access pricing and be among the first users.
           </p>
 
           <div className="bg-white rounded-2xl shadow-xl p-6 md:p-8 mb-6 md:mb-8">
-            <WaitlistForm />
+            <EarlyAccessForm />
           </div>
 
           <div className="grid grid-cols-3 gap-4 md:gap-6 text-center">
             <div>
               <div className="text-2xl md:text-3xl font-bold text-gray-900 mb-1 md:mb-2">⚡</div>
               <div className="text-sm md:text-base font-semibold text-gray-900 mb-1">Instant Setup</div>
-              <div className="text-xs md:text-sm text-gray-600">5 minutes to first signature</div>
+              <div className="text-xs md:text-sm text-gray-600">5 minutes to signature</div>
             </div>
             <div>
               <div className="text-2xl md:text-3xl font-bold text-gray-900 mb-1 md:mb-2">🔒</div>
               <div className="text-sm md:text-base font-semibold text-gray-900 mb-1">Price Lock</div>
-              <div className="text-xs md:text-sm text-gray-600">$9.99/month forever</div>
+              <div className="text-xs md:text-sm text-gray-600">Locked in for life</div>
             </div>
             <div>
               <div className="text-2xl md:text-3xl font-bold text-gray-900 mb-1 md:mb-2">✓</div>
@@ -709,29 +719,32 @@ export default function Home() {
               <ul className="space-y-1 md:space-y-2 text-xs md:text-sm">
                 <li><a href="/" className="hover:text-white transition-colors">Home</a></li>
                 <li><a href="/dashboard" className="hover:text-white transition-colors">Dashboard</a></li>
-                <li><a href="#waitlist" className="hover:text-white transition-colors">Pricing</a></li>
+                <li><a href="#early-access" className="hover:text-white transition-colors">Pricing</a></li>
               </ul>
             </div>
 
             <div>
-              <h3 className="font-semibold text-white mb-2 md:mb-3 text-sm md:text-base">Company</h3>
+              <h3 className="font-semibold text-white mb-2 md:mb-3 text-sm md:text-base">Legal</h3>
               <ul className="space-y-1 md:space-y-2 text-xs md:text-sm">
-                <li><a href="#" className="hover:text-white transition-colors">About</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Contact</a></li>
+                <li><a href="/terms" className="hover:text-white transition-colors">Terms of Service</a></li>
+                <li><a href="/privacy" className="hover:text-white transition-colors">Privacy Policy</a></li>
               </ul>
             </div>
 
             <div>
               <h3 className="font-semibold text-white mb-2 md:mb-3 text-sm md:text-base">Contact</h3>
               <ul className="space-y-1 md:space-y-2 text-xs md:text-sm">
-                <li><a href="mailto:support@swiftsign.com" className="hover:text-white transition-colors">support@swiftsign.com</a></li>
+                <li><a href="mailto:support@swiftsignapp.com" className="hover:text-white transition-colors">support@swiftsignapp.com</a></li>
                 <li className="text-gray-400">Built for Google Workspace</li>
               </ul>
             </div>
           </div>
 
-          <div className="border-t border-gray-800 pt-6 md:pt-8 text-center text-xs md:text-sm text-gray-400">
+          <div className="border-t border-gray-800 pt-6 md:pt-8 text-center text-xs md:text-sm text-gray-400 space-y-2">
             <p>© 2026 SwiftSign. All rights reserved.</p>
+            <p className="text-xs">
+              Google Workspace is a trademark of Google LLC. SwiftSign is not affiliated with or endorsed by Google.
+            </p>
           </div>
         </div>
       </footer>
@@ -739,7 +752,7 @@ export default function Home() {
   )
 }
 
-function WaitlistForm() {
+function EarlyAccessForm() {
   const [email, setEmail] = useState('')
   const [loading, setLoading] = useState(false)
   const [message, setMessage] = useState('')
@@ -756,12 +769,12 @@ function WaitlistForm() {
 
       if (error) {
         if (error.code === '23505') {
-          setMessage("You're already on the waitlist!")
+          setMessage("You're already on the early access list!")
         } else {
           setMessage('Something went wrong. Try again.')
         }
       } else {
-        setMessage('✅ Success! You\'re on the list! Check your email.')
+        setMessage('✅ Success! Check your email for next steps.')
         setEmail('')
       }
     } catch (err) {
@@ -794,7 +807,7 @@ function WaitlistForm() {
         <p className="text-center text-sm text-gray-700 font-medium mb-2">{message}</p>
       )}
       <p className="text-xs text-gray-500 text-center">
-        🔥 <strong className="text-gray-700">83 spots left</strong> • First 100 users lock in $9.99/month forever
+        <strong className="text-gray-700">83 spots left</strong> • First 100 users: $9.99/month locked in for life
       </p>
     </div>
   )
